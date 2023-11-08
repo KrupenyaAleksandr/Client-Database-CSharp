@@ -156,6 +156,7 @@
             this.toolStripButtonInsertSportsman.Name = "toolStripButtonInsertSportsman";
             this.toolStripButtonInsertSportsman.Size = new System.Drawing.Size(63, 22);
             this.toolStripButtonInsertSportsman.Text = "Добавить";
+            this.toolStripButtonInsertSportsman.Click += new System.EventHandler(this.toolStripButtonInsertSportsman_Click);
             // 
             // toolStripButtonUpdateSportsman
             // 
@@ -164,6 +165,7 @@
             this.toolStripButtonUpdateSportsman.Name = "toolStripButtonUpdateSportsman";
             this.toolStripButtonUpdateSportsman.Size = new System.Drawing.Size(65, 22);
             this.toolStripButtonUpdateSportsman.Text = "Обновить";
+            this.toolStripButtonUpdateSportsman.Click += new System.EventHandler(this.toolStripButtonUpdateSportsman_Click);
             // 
             // toolStripButtonDeleteSportsman
             // 

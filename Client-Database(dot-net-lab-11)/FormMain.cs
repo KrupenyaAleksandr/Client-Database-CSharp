@@ -34,8 +34,24 @@ namespace Client_Database_dot_net_lab_11_
                     listViewItem.SubItems.Add(sportsman.MiddleName);
                 else listViewItem.SubItems.Add("");
                 listViewItem.SubItems.Add(sportsman.LastName);
-                listViewItem.SubItems.Add(sportsman.SportClub);
+                listViewItem.SubItems.Add(sportsman.SportClub.ToString());
             }
+        }
+
+        private void toolStripButtonInsertSportsman_Click(object sender, EventArgs e)
+        {
+            FormSportsman formSportsman = new FormSportsman
+            {
+                Sportsman = new Sportsman()
+            };
+            if (formSportsman.ShowDialog() == DialogResult.OK)
+            {
+                Sportsman.Insert(connectionString, formSportsman.Sportsman);
+            }
+        }
+        private void toolStripButtonUpdateSportsman_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
