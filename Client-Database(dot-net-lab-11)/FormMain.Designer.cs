@@ -174,6 +174,7 @@
             this.toolStripButtonDeleteSportsman.Name = "toolStripButtonDeleteSportsman";
             this.toolStripButtonDeleteSportsman.Size = new System.Drawing.Size(55, 22);
             this.toolStripButtonDeleteSportsman.Text = "Удалить";
+            this.toolStripButtonDeleteSportsman.Click += new System.EventHandler(this.toolStripButtonDeleteSportsman_Click);
             // 
             // tabPage2
             // 

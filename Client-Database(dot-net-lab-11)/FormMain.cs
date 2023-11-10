@@ -32,9 +32,13 @@ namespace Client_Database_dot_net_lab_11_
                 listViewItem.SubItems.Add(sportsman.FirstName);
                 if (sportsman.MiddleName != null)
                     listViewItem.SubItems.Add(sportsman.MiddleName);
-                else listViewItem.SubItems.Add("");
+                else 
+                    listViewItem.SubItems.Add("");
                 listViewItem.SubItems.Add(sportsman.LastName);
-                listViewItem.SubItems.Add(sportsman.SportClub.ToString());
+                if (sportsman.SportClub != null)
+                    listViewItem.SubItems.Add(sportsman.SportClub.ToString());
+                else
+                    listViewItem.SubItems.Add("");
             }
         }
 
@@ -45,13 +49,35 @@ namespace Client_Database_dot_net_lab_11_
                 Sportsman = new Sportsman()
             };
             if (formSportsman.ShowDialog() == DialogResult.OK)
-            {
                 Sportsman.Insert(connectionString, formSportsman.Sportsman);
-            }
         }
         private void toolStripButtonUpdateSportsman_Click(object sender, EventArgs e)
         {
+            try
+            {
+                FormSportsman formSportsman = new FormSportsman()
+                {
+                    Sportsman = (Sportsman)listViewSportsman.SelectedItems[0].Tag
+                }; 
+                if (formSportsman.ShowDialog() == DialogResult.OK)
+                    Sportsman.Update(connectionString, formSportsman.Sportsman);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
+        private void toolStripButtonDeleteSportsman_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Sportsman.Delete(connectionString, Convert.ToInt32(listViewSportsman.SelectedItems[0].SubItems[0].Text));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
