@@ -30,6 +30,7 @@
         {
             this.tabControlSportsman = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.pictureBoxPlayer = new System.Windows.Forms.PictureBox();
             this.listViewSportsman = new System.Windows.Forms.ListView();
             this.columnSportsmanId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnSportsmanFirstName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -52,6 +53,7 @@
             this.toolStripButtonDeleteSportClub = new System.Windows.Forms.ToolStripButton();
             this.tabControlSportsman.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).BeginInit();
             this.toolStripSportsman.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -65,20 +67,29 @@
             this.tabControlSportsman.Location = new System.Drawing.Point(0, 0);
             this.tabControlSportsman.Name = "tabControlSportsman";
             this.tabControlSportsman.SelectedIndex = 0;
-            this.tabControlSportsman.Size = new System.Drawing.Size(499, 450);
+            this.tabControlSportsman.Size = new System.Drawing.Size(689, 450);
             this.tabControlSportsman.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.pictureBoxPlayer);
             this.tabPage1.Controls.Add(this.listViewSportsman);
             this.tabPage1.Controls.Add(this.toolStripSportsman);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(491, 424);
+            this.tabPage1.Size = new System.Drawing.Size(681, 424);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Спортсмены";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // pictureBoxPlayer
+            // 
+            this.pictureBoxPlayer.Location = new System.Drawing.Point(554, 47);
+            this.pictureBoxPlayer.Name = "pictureBoxPlayer";
+            this.pictureBoxPlayer.Size = new System.Drawing.Size(100, 132);
+            this.pictureBoxPlayer.TabIndex = 1;
+            this.pictureBoxPlayer.TabStop = false;
             // 
             // listViewSportsman
             // 
@@ -93,39 +104,40 @@
             this.listViewSportsman.HideSelection = false;
             this.listViewSportsman.Location = new System.Drawing.Point(3, 28);
             this.listViewSportsman.Name = "listViewSportsman";
-            this.listViewSportsman.Size = new System.Drawing.Size(486, 393);
+            this.listViewSportsman.Size = new System.Drawing.Size(520, 393);
             this.listViewSportsman.TabIndex = 0;
             this.listViewSportsman.UseCompatibleStateImageBehavior = false;
             this.listViewSportsman.View = System.Windows.Forms.View.Details;
+            this.listViewSportsman.Click += new System.EventHandler(this.listViewSportsman_Click);
             // 
             // columnSportsmanId
             // 
             this.columnSportsmanId.Text = "ID";
-            this.columnSportsmanId.Width = 80;
+            this.columnSportsmanId.Width = 40;
             // 
             // columnSportsmanFirstName
             // 
             this.columnSportsmanFirstName.Text = "First name";
             this.columnSportsmanFirstName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnSportsmanFirstName.Width = 110;
+            this.columnSportsmanFirstName.Width = 120;
             // 
             // columnSportsmanMiddleName
             // 
             this.columnSportsmanMiddleName.Text = "Middle name";
             this.columnSportsmanMiddleName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnSportsmanMiddleName.Width = 110;
+            this.columnSportsmanMiddleName.Width = 120;
             // 
             // columnSportsmanLastName
             // 
             this.columnSportsmanLastName.Text = "Last name";
             this.columnSportsmanLastName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnSportsmanLastName.Width = 110;
+            this.columnSportsmanLastName.Width = 120;
             // 
             // columnSportsmanSportClubId
             // 
             this.columnSportsmanSportClubId.Text = "Sport club id";
             this.columnSportsmanSportClubId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnSportsmanSportClubId.Width = 76;
+            this.columnSportsmanSportClubId.Width = 120;
             // 
             // toolStripSportsman
             // 
@@ -136,7 +148,7 @@
             this.toolStripButtonDeleteSportsman});
             this.toolStripSportsman.Location = new System.Drawing.Point(3, 3);
             this.toolStripSportsman.Name = "toolStripSportsman";
-            this.toolStripSportsman.Size = new System.Drawing.Size(485, 25);
+            this.toolStripSportsman.Size = new System.Drawing.Size(675, 25);
             this.toolStripSportsman.TabIndex = 0;
             this.toolStripSportsman.Text = "toolStrip1";
             // 
@@ -183,7 +195,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(491, 424);
+            this.tabPage2.Size = new System.Drawing.Size(681, 424);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Спортивные клубы";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -223,7 +235,7 @@
             this.toolStripButtonDeleteSportClub});
             this.toolStrip1.Location = new System.Drawing.Point(3, 3);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(485, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(675, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStripSportClub";
             // 
@@ -263,13 +275,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(499, 450);
+            this.ClientSize = new System.Drawing.Size(689, 450);
             this.Controls.Add(this.tabControlSportsman);
             this.Name = "FormMain";
             this.Text = "Main";
             this.tabControlSportsman.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).EndInit();
             this.toolStripSportsman.ResumeLayout(false);
             this.toolStripSportsman.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -304,6 +317,7 @@
         private System.Windows.Forms.ListView listViewSportClub;
         private System.Windows.Forms.ColumnHeader columnSportClubId;
         private System.Windows.Forms.ColumnHeader columnSportClubTitle;
+        private System.Windows.Forms.PictureBox pictureBoxPlayer;
     }
 }
 

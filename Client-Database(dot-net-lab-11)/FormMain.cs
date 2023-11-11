@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,7 @@ namespace Client_Database_dot_net_lab_11_
         public FormMain()
         {
             InitializeComponent();
+            pictureBoxPlayer.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
         private void toolStripButtonSelectSportsman_Click(object sender, EventArgs e)
@@ -73,6 +75,32 @@ namespace Client_Database_dot_net_lab_11_
             try
             {
                 Sportsman.Delete(connectionString, Convert.ToInt32(listViewSportsman.SelectedItems[0].SubItems[0].Text));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void listViewSportsman_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listViewSportsman_Click(object sender, EventArgs e)
+        {
+            Sportsman sportsman = (sender as ListView).SelectedItems[0].Tag as Sportsman;
+            if (sportsman.Photo == null)
+            {
+                pictureBoxPlayer.Image = null;
+                return;
+            }
+            try
+            {
+                using (var memoryStream = new MemoryStream(sportsman.Photo))
+                {
+                    pictureBoxPlayer.Image = Image.FromStream(memoryStream);
+                }
             }
             catch (Exception ex)
             {

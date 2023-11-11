@@ -13,17 +13,17 @@ namespace Client_Database_dot_net_lab_11_.Model
     public class Sportsman
     {
         private static readonly string selectSportsmansCommand =
-            @"SELECT sportsman.id, sportsman.first_name, sportsman.middle_name, sportsman.last_name, sport_club.title
+            @"SELECT sportsman.id, sportsman.first_name, sportsman.middle_name, sportsman.last_name, sportsman.photo, sport_club.title
             FROM schema_sport.sportsman
             LEFT JOIN schema_sport.sport_club ON sportsman.sport_club_id = sport_club.id";
 
         private static string insertSportsmanCommand =
-            @"INSERT INTO schema_sport.sportsman (first_name, middle_name, last_name, sport_club_id) VALUES
-            (@first_name, @middle_name, @last_name, @sport_club_id)";
+            @"INSERT INTO schema_sport.sportsman (first_name, middle_name, last_name, photo, sport_club_id) VALUES
+            (@first_name, @middle_name, @last_name, @photo, @sport_club_id)";
 
         private static string updateSportsmanCommand =
             @"UPDATE schema_sport.sportsman SET first_name = @first_name, middle_name = @middle_name, last_name = @last_name,
-            sport_club_id = @sport_club_id WHERE id = @id";
+            photo = @photo, sport_club_id = @sport_club_id WHERE id = @id";
 
         private static string deleteSportsmanCommand =
             @"DELETE FROM schema_sport.sportsman WHERE id=@id";
@@ -55,7 +55,12 @@ namespace Client_Database_dot_net_lab_11_.Model
                                     sportsman.MiddleName = pgsqlReader.GetString(2);
                                 sportsman.LastName = pgsqlReader.GetString(3);
                                 if (!pgsqlReader.IsDBNull(4))
-                                    sportsman.SportClub = pgsqlReader.GetString(4);
+                                {
+                                    sportsman.Photo = new byte[4194304];
+                                    pgsqlReader.GetBytes(4, 0, sportsman.Photo, 0, 4194304);
+                                }
+                                if (!pgsqlReader.IsDBNull(5))
+                                    sportsman.SportClub = pgsqlReader.GetString(5);
                                 sportsmanList.Add(sportsman);
                             }
                         }
@@ -110,6 +115,10 @@ namespace Client_Database_dot_net_lab_11_.Model
                         else 
                             pgsqlCommand.Parameters.AddWithValue("@middle_name", sportsman.MiddleName);
                         pgsqlCommand.Parameters.AddWithValue("@last_name", sportsman.LastName);
+                        if (sportsman.Photo == null)
+                            pgsqlCommand.Parameters.AddWithValue("@photo", DBNull.Value);
+                        else
+                            pgsqlCommand.Parameters.AddWithValue("@photo", sportsman.Photo);
                         if (tmpSportClubId == -1)
                             pgsqlCommand.Parameters.AddWithValue("@sport_club_id", DBNull.Value);
                         else
@@ -164,6 +173,10 @@ namespace Client_Database_dot_net_lab_11_.Model
                         else
                             pgsqlCommand.Parameters.AddWithValue("@middle_name", sportsman.MiddleName);
                         pgsqlCommand.Parameters.AddWithValue("@last_name", sportsman.LastName);
+                        if (sportsman.Photo == null)
+                            pgsqlCommand.Parameters.AddWithValue("@photo", DBNull.Value);
+                        else
+                            pgsqlCommand.Parameters.AddWithValue("@photo", sportsman.Photo);
                         if (tmpSportClubId == -1)
                             pgsqlCommand.Parameters.AddWithValue("@sport_club_id", DBNull.Value);
                         else
