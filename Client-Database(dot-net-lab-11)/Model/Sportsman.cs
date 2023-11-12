@@ -33,34 +33,34 @@ namespace Client_Database_dot_net_lab_11_.Model
         public string MiddleName { get; set; } = null;
         public string LastName { get; set; }
         public byte[] Photo { get; set; } = null;
-        public string SportClub { get; set; } 
+        public string SportClub { get; set; } = null;
         public static List<Sportsman> Select(string connectionString)
         {
             List<Sportsman> sportsmanList = new List<Sportsman>();
-            using (var pgsqlConnection = new NpgsqlConnection(connectionString))
+            using (var npgsqlConnection = new NpgsqlConnection(connectionString))
             {
                 try
                 {
-                    pgsqlConnection.Open();
-                    using (var pgsqlCommand = new NpgsqlCommand(selectSportsmansCommand, pgsqlConnection))
+                    npgsqlConnection.Open();
+                    using (var npgsqlCommand = new NpgsqlCommand(selectSportsmansCommand, npgsqlConnection))
                     {
-                        using (var pgsqlReader = pgsqlCommand.ExecuteReader())
+                        using (var npgsqlReader = npgsqlCommand.ExecuteReader())
                         {
-                            while (pgsqlReader.Read())
+                            while (npgsqlReader.Read())
                             {
                                 Sportsman sportsman = new Sportsman();
-                                sportsman.Id = pgsqlReader.GetInt32(0);
-                                sportsman.FirstName = pgsqlReader.GetString(1);
-                                if (!pgsqlReader.IsDBNull(2))
-                                    sportsman.MiddleName = pgsqlReader.GetString(2);
-                                sportsman.LastName = pgsqlReader.GetString(3);
-                                if (!pgsqlReader.IsDBNull(4))
+                                sportsman.Id = npgsqlReader.GetInt32(0);
+                                sportsman.FirstName = npgsqlReader.GetString(1);
+                                if (!npgsqlReader.IsDBNull(2))
+                                    sportsman.MiddleName = npgsqlReader.GetString(2);
+                                sportsman.LastName = npgsqlReader.GetString(3);
+                                if (!npgsqlReader.IsDBNull(4))
                                 {
                                     sportsman.Photo = new byte[4194304];
-                                    pgsqlReader.GetBytes(4, 0, sportsman.Photo, 0, 4194304);
+                                    npgsqlReader.GetBytes(4, 0, sportsman.Photo, 0, 4194304);
                                 }
-                                if (!pgsqlReader.IsDBNull(5))
-                                    sportsman.SportClub = pgsqlReader.GetString(5);
+                                if (!npgsqlReader.IsDBNull(5))
+                                    sportsman.SportClub = npgsqlReader.GetString(5);
                                 sportsmanList.Add(sportsman);
                             }
                         }
@@ -68,12 +68,12 @@ namespace Client_Database_dot_net_lab_11_.Model
                 }
                 catch (Exception ex)
                 {
-                    pgsqlConnection?.Close();
+                    npgsqlConnection?.Close();
                     MessageBox.Show(ex.Message);
                 }
                 finally
                 {
-                    pgsqlConnection?.Close();
+                    npgsqlConnection?.Close();
                 }
             }
             return sportsmanList;
@@ -82,131 +82,131 @@ namespace Client_Database_dot_net_lab_11_.Model
         public static void Insert(string connectionString, Sportsman sportsman)
         {
             int tmpSportClubId = -1;
-            using (var pgsqlConnection = new NpgsqlConnection(connectionString))
+            using (var npgsqlConnection = new NpgsqlConnection(connectionString))
             {
                 try
                 {
-                    pgsqlConnection.Open();
-                    using (var pgsqlCommand = new NpgsqlCommand(string.Format("SELECT sport_club.id FROM schema_sport.sport_club WHERE sport_club.title = '{0}'", 
-                        sportsman.SportClub), pgsqlConnection))
+                    npgsqlConnection.Open();
+                    using (var npgsqlCommand = new NpgsqlCommand(string.Format("SELECT sport_club.id FROM schema_sport.sport_club WHERE sport_club.title = '{0}'", 
+                        sportsman.SportClub), npgsqlConnection))
                     {
                         try
                         {
-                            using (var pgsqlReader = pgsqlCommand.ExecuteReader())
+                            using (var npgsqlReader = npgsqlCommand.ExecuteReader())
                             {
-                                while (pgsqlReader.Read())
+                                while (npgsqlReader.Read())
                                 {
-                                    tmpSportClubId = pgsqlReader.GetInt32(0);
+                                    tmpSportClubId = npgsqlReader.GetInt32(0);
                                 }
                             }
                         }
                         catch (Exception ex)
                         {
                             MessageBox.Show(ex.Message);
-                            pgsqlConnection.Close();
+                            npgsqlConnection.Close();
                             return;
                         }
                     }
-                    using (var pgsqlCommand = new NpgsqlCommand(insertSportsmanCommand, pgsqlConnection))
+                    using (var npgsqlCommand = new NpgsqlCommand(insertSportsmanCommand, npgsqlConnection))
                     {
-                        pgsqlCommand.Parameters.AddWithValue("@first_name", sportsman.FirstName);
+                        npgsqlCommand.Parameters.AddWithValue("@first_name", sportsman.FirstName);
                         if (sportsman.MiddleName == "") 
-                            pgsqlCommand.Parameters.AddWithValue("@middle_name", DBNull.Value);
+                            npgsqlCommand.Parameters.AddWithValue("@middle_name", DBNull.Value);
                         else 
-                            pgsqlCommand.Parameters.AddWithValue("@middle_name", sportsman.MiddleName);
-                        pgsqlCommand.Parameters.AddWithValue("@last_name", sportsman.LastName);
+                            npgsqlCommand.Parameters.AddWithValue("@middle_name", sportsman.MiddleName);
+                        npgsqlCommand.Parameters.AddWithValue("@last_name", sportsman.LastName);
                         if (sportsman.Photo == null)
-                            pgsqlCommand.Parameters.AddWithValue("@photo", DBNull.Value);
+                            npgsqlCommand.Parameters.AddWithValue("@photo", DBNull.Value);
                         else
-                            pgsqlCommand.Parameters.AddWithValue("@photo", sportsman.Photo);
+                            npgsqlCommand.Parameters.AddWithValue("@photo", sportsman.Photo);
                         if (tmpSportClubId == -1)
-                            pgsqlCommand.Parameters.AddWithValue("@sport_club_id", DBNull.Value);
+                            npgsqlCommand.Parameters.AddWithValue("@sport_club_id", DBNull.Value);
                         else
-                            pgsqlCommand.Parameters.AddWithValue("@sport_club_id", tmpSportClubId);
-                        pgsqlCommand.ExecuteNonQuery();
+                            npgsqlCommand.Parameters.AddWithValue("@sport_club_id", tmpSportClubId);
+                        npgsqlCommand.ExecuteNonQuery();
                     }
                 }
                 catch (Exception ex)
                 {
-                    pgsqlConnection?.Close();
+                    npgsqlConnection?.Close();
                     MessageBox.Show(ex.Message);
                 }
                 finally
                 {
-                    pgsqlConnection?.Close();
+                    npgsqlConnection?.Close();
                 }
             }
         }
         public static void Update(string connectionString, Sportsman sportsman)
         {
             int tmpSportClubId = -1;
-            using (var pgsqlConnection = new NpgsqlConnection(connectionString))
+            using (var npgsqlConnection = new NpgsqlConnection(connectionString))
             {
                 try
                 {
-                    pgsqlConnection.Open();
-                    using (var pgsqlCommand = new NpgsqlCommand(string.Format("SELECT sport_club.id FROM schema_sport.sport_club WHERE sport_club.title = '{0}'",
-                        sportsman.SportClub), pgsqlConnection))
+                    npgsqlConnection.Open();
+                    using (var npgsqlCommand = new NpgsqlCommand(string.Format("SELECT sport_club.id FROM schema_sport.sport_club WHERE sport_club.title = '{0}'",
+                        sportsman.SportClub), npgsqlConnection))
                     {
                         try
                         {
-                            using (var pgsqlReader = pgsqlCommand.ExecuteReader())
+                            using (var npgsqlReader = npgsqlCommand.ExecuteReader())
                             {
-                                while (pgsqlReader.Read())
+                                while (npgsqlReader.Read())
                                 {
-                                    tmpSportClubId = pgsqlReader.GetInt32(0);
+                                    tmpSportClubId = npgsqlReader.GetInt32(0);
                                 }
                             }
                         }
                         catch (Exception ex)
                         {
                             MessageBox.Show(ex.Message);
-                            pgsqlConnection.Close();
+                            npgsqlConnection.Close();
                             return;
                         }
                     }
-                    using (var pgsqlCommand = new NpgsqlCommand(updateSportsmanCommand, pgsqlConnection))
+                    using (var npgsqlCommand = new NpgsqlCommand(updateSportsmanCommand, npgsqlConnection))
                     {
-                        pgsqlCommand.Parameters.AddWithValue("@first_name", sportsman.FirstName);
+                        npgsqlCommand.Parameters.AddWithValue("@first_name", sportsman.FirstName);
                         if (sportsman.MiddleName == "")
-                            pgsqlCommand.Parameters.AddWithValue("@middle_name", DBNull.Value);
+                            npgsqlCommand.Parameters.AddWithValue("@middle_name", DBNull.Value);
                         else
-                            pgsqlCommand.Parameters.AddWithValue("@middle_name", sportsman.MiddleName);
-                        pgsqlCommand.Parameters.AddWithValue("@last_name", sportsman.LastName);
+                            npgsqlCommand.Parameters.AddWithValue("@middle_name", sportsman.MiddleName);
+                        npgsqlCommand.Parameters.AddWithValue("@last_name", sportsman.LastName);
                         if (sportsman.Photo == null)
-                            pgsqlCommand.Parameters.AddWithValue("@photo", DBNull.Value);
+                            npgsqlCommand.Parameters.AddWithValue("@photo", DBNull.Value);
                         else
-                            pgsqlCommand.Parameters.AddWithValue("@photo", sportsman.Photo);
+                            npgsqlCommand.Parameters.AddWithValue("@photo", sportsman.Photo);
                         if (tmpSportClubId == -1)
-                            pgsqlCommand.Parameters.AddWithValue("@sport_club_id", DBNull.Value);
+                            npgsqlCommand.Parameters.AddWithValue("@sport_club_id", DBNull.Value);
                         else
-                            pgsqlCommand.Parameters.AddWithValue("@sport_club_id", tmpSportClubId);
-                        pgsqlCommand.Parameters.AddWithValue("@id", sportsman.Id);
-                        pgsqlCommand.ExecuteNonQuery();
+                            npgsqlCommand.Parameters.AddWithValue("@sport_club_id", tmpSportClubId);
+                        npgsqlCommand.Parameters.AddWithValue("@id", sportsman.Id);
+                        npgsqlCommand.ExecuteNonQuery();
                     }
                 }
                 catch (Exception ex)
                 {
-                    pgsqlConnection?.Close();
+                    npgsqlConnection?.Close();
                     MessageBox.Show(ex.Message);
                 }
                 finally
                 {
-                    pgsqlConnection?.Close();
+                    npgsqlConnection?.Close();
                 }
             }
         }
-        public static void Delete(string connectionString, int id)
+        public static void Delete(string connectionString, int sportsmanId)
         {
-            using (var pgsqlConnection = new NpgsqlConnection(connectionString))
+            using (var npgsqlConnection = new NpgsqlConnection(connectionString))
             {
                 try
                 {
-                    pgsqlConnection.Open();
-                    using (var pgsqlCommand = new NpgsqlCommand(deleteSportsmanCommand, pgsqlConnection))
+                    npgsqlConnection.Open();
+                    using (var npgsqlCommand = new NpgsqlCommand(deleteSportsmanCommand, npgsqlConnection))
                     {
-                        pgsqlCommand.Parameters.AddWithValue("@id", id);
-                        pgsqlCommand.ExecuteNonQuery();
+                        npgsqlCommand.Parameters.AddWithValue("@id", sportsmanId);
+                        npgsqlCommand.ExecuteNonQuery();
                     }
                 }
                 catch (Exception ex)
@@ -215,7 +215,7 @@ namespace Client_Database_dot_net_lab_11_.Model
                 }
                 finally
                 {
-                    pgsqlConnection?.Close();
+                    npgsqlConnection?.Close();
                 }
             }
         }

@@ -64,9 +64,9 @@ namespace Client_Database_dot_net_lab_11_
                 if (formSportsman.ShowDialog() == DialogResult.OK)
                     Sportsman.Update(connectionString, formSportsman.Sportsman);
             }
-            catch (Exception ex)
+            catch 
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Не выбрана строка");
             }
         }
 
@@ -76,15 +76,10 @@ namespace Client_Database_dot_net_lab_11_
             {
                 Sportsman.Delete(connectionString, Convert.ToInt32(listViewSportsman.SelectedItems[0].SubItems[0].Text));
             }
-            catch (Exception ex)
+            catch 
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Не выбрана строка");
             }
-        }
-
-        private void listViewSportsman_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void listViewSportsman_Click(object sender, EventArgs e)
@@ -105,6 +100,58 @@ namespace Client_Database_dot_net_lab_11_
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void toolStripButtonSelectSportClub_Click(object sender, EventArgs e)
+        {
+            var sportClubList = SportClub.Select(connectionString);
+            listViewSportClub.Items.Clear();
+            for (int i = 0; i < sportClubList.Count; ++i)
+            {
+                var sportClub = sportClubList[i];
+                var listViewItem = listViewSportClub.Items.Add(sportClub.Id.ToString());
+                listViewItem.Tag = sportClub;
+                listViewItem.SubItems.Add(sportClub.Title);
+            }
+        }
+
+        private void toolStripButtonInsertSportClub_Click(object sender, EventArgs e)
+        {
+            FormSportClub formSportClub = new FormSportClub
+            {
+                SportClub = new SportClub()
+            };
+            if (formSportClub.ShowDialog() == DialogResult.OK)
+                SportClub.Insert(connectionString, formSportClub.SportClub);
+        }
+
+        private void toolStripButtonUpdateSportClub_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FormSportClub formSportClub = new FormSportClub()
+                {
+                    SportClub = (SportClub)listViewSportClub.SelectedItems[0].Tag
+                };
+                if (formSportClub.ShowDialog() == DialogResult.OK)
+                    SportClub.Update(connectionString, formSportClub.SportClub);
+            }
+            catch 
+            {
+                MessageBox.Show("Не выбрана строка");
+            }
+        }
+
+        private void toolStripButtonDeleteSportClub_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SportClub.Delete(connectionString, Convert.ToInt32(listViewSportClub.SelectedItems[0].SubItems[0].Text));
+            }
+            catch
+            {
+                MessageBox.Show("Не выбрана строка");
             }
         }
     }

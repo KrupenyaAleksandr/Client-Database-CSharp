@@ -100,6 +100,12 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormSportClub.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSportClub.Designer.cs">
+      <DependentUpon>FormSportClub.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormSportsman.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +118,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSportClub.resx">
+      <DependentUpon>FormSportClub.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSportsman.resx">
       <DependentUpon>FormSportsman.cs</DependentUpon>

@@ -46,7 +46,7 @@
             this.listViewSportClub = new System.Windows.Forms.ListView();
             this.columnSportClubId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnSportClubTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripSportClub = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSelectSportClub = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonInsertSportClub = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonUpdateSportClub = new System.Windows.Forms.ToolStripButton();
@@ -56,7 +56,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).BeginInit();
             this.toolStripSportsman.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
+            this.toolStripSportClub.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlSportsman
@@ -191,7 +191,7 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.listViewSportClub);
-            this.tabPage2.Controls.Add(this.toolStrip1);
+            this.tabPage2.Controls.Add(this.toolStripSportClub);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -226,18 +226,18 @@
             this.columnSportClubTitle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnSportClubTitle.Width = 124;
             // 
-            // toolStrip1
+            // toolStripSportClub
             // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSportClub.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonSelectSportClub,
             this.toolStripButtonInsertSportClub,
             this.toolStripButtonUpdateSportClub,
             this.toolStripButtonDeleteSportClub});
-            this.toolStrip1.Location = new System.Drawing.Point(3, 3);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(675, 25);
-            this.toolStrip1.TabIndex = 0;
-            this.toolStrip1.Text = "toolStripSportClub";
+            this.toolStripSportClub.Location = new System.Drawing.Point(3, 3);
+            this.toolStripSportClub.Name = "toolStripSportClub";
+            this.toolStripSportClub.Size = new System.Drawing.Size(675, 25);
+            this.toolStripSportClub.TabIndex = 0;
+            this.toolStripSportClub.Text = "toolStripSportClub";
             // 
             // toolStripButtonSelectSportClub
             // 
@@ -245,7 +245,8 @@
             this.toolStripButtonSelectSportClub.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonSelectSportClub.Name = "toolStripButtonSelectSportClub";
             this.toolStripButtonSelectSportClub.Size = new System.Drawing.Size(65, 22);
-            this.toolStripButtonSelectSportClub.Text = "Загрузить";
+            this.toolStripButtonSelectSportClub.Text = "Получить";
+            this.toolStripButtonSelectSportClub.Click += new System.EventHandler(this.toolStripButtonSelectSportClub_Click);
             // 
             // toolStripButtonInsertSportClub
             // 
@@ -254,6 +255,7 @@
             this.toolStripButtonInsertSportClub.Name = "toolStripButtonInsertSportClub";
             this.toolStripButtonInsertSportClub.Size = new System.Drawing.Size(63, 22);
             this.toolStripButtonInsertSportClub.Text = "Добавить";
+            this.toolStripButtonInsertSportClub.Click += new System.EventHandler(this.toolStripButtonInsertSportClub_Click);
             // 
             // toolStripButtonUpdateSportClub
             // 
@@ -262,6 +264,7 @@
             this.toolStripButtonUpdateSportClub.Name = "toolStripButtonUpdateSportClub";
             this.toolStripButtonUpdateSportClub.Size = new System.Drawing.Size(65, 22);
             this.toolStripButtonUpdateSportClub.Text = "Обновить";
+            this.toolStripButtonUpdateSportClub.Click += new System.EventHandler(this.toolStripButtonUpdateSportClub_Click);
             // 
             // toolStripButtonDeleteSportClub
             // 
@@ -270,6 +273,7 @@
             this.toolStripButtonDeleteSportClub.Name = "toolStripButtonDeleteSportClub";
             this.toolStripButtonDeleteSportClub.Size = new System.Drawing.Size(55, 22);
             this.toolStripButtonDeleteSportClub.Text = "Удалить";
+            this.toolStripButtonDeleteSportClub.Click += new System.EventHandler(this.toolStripButtonDeleteSportClub_Click);
             // 
             // FormMain
             // 
@@ -287,8 +291,8 @@
             this.toolStripSportsman.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.toolStripSportClub.ResumeLayout(false);
+            this.toolStripSportClub.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -309,7 +313,7 @@
         private System.Windows.Forms.ColumnHeader columnSportsmanMiddleName;
         private System.Windows.Forms.ColumnHeader columnSportsmanLastName;
         private System.Windows.Forms.ColumnHeader columnSportsmanSportClubId;
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStrip toolStripSportClub;
         private System.Windows.Forms.ToolStripButton toolStripButtonSelectSportClub;
         private System.Windows.Forms.ToolStripButton toolStripButtonInsertSportClub;
         private System.Windows.Forms.ToolStripButton toolStripButtonUpdateSportClub;
