@@ -64,5 +64,10 @@ namespace Client_Database_dot_net_lab_11_
                 }
             }
         }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+        }
     }
 }
