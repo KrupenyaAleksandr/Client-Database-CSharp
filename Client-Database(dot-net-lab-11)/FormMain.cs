@@ -16,7 +16,8 @@ namespace Client_Database_dot_net_lab_11_
 {
     public partial class FormMain : Form
     {
-        private readonly string connectionString = "Host=localhost;Username=postgres;Password=sasha;Database=postgres";
+        //postgres connection
+        private readonly string connectionString = "Host=;Username=;Password=;Database=";
         public FormMain()
         {
             InitializeComponent();
